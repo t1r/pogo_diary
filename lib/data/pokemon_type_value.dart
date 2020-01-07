@@ -2,12 +2,24 @@
 import 'package:meta/meta.dart';
 
 enum PokemonTypes {
-  Bug, Dark, Dragon,
-  Electric, Fairy, Fighting,
-  Fire, Flying, Ghost,
-  Grass, Ground, Ice,
-  Normal, Poison, Psychic,
-  Rock, Steel, Water
+  Normal,
+  Fighting, 
+  Flying,
+  Poison,
+  Ground,
+  Rock,
+  Bug,
+  Ghost,
+  Steel,
+  Fire,
+  Water,
+  Grass,
+  Electric,
+  Psychic,
+  Ice, 
+  Dragon,
+  Dark,
+  Fairy
 }
 
 class PokemonTypeValue {
