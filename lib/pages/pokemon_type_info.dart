@@ -22,19 +22,24 @@ class PokemonTypeInfoPage extends StatelessWidget {
       body: Center(
         child: Column(
           children: <Widget>[
+            Padding(padding: EdgeInsets.only(top: 16)),
             PokemonTypeChipWidget(chip: chip),
-            Text("Vulnerable"),
+            Padding(padding: EdgeInsets.only(top: 16)),
+            Text("Vulnerable",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             ListView(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.only(left: 16, right: 16),
                 shrinkWrap: true,
                 children: <Widget>[
                   PokemonTypeChipWidget(chip: chip),
                   PokemonTypeChipWidget(chip: chip),
                   PokemonTypeChipWidget(chip: chip)
                 ]),
-            Text("Resistant"),
+            Padding(padding: EdgeInsets.only(top: 16)),
+            Text("Resistant",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             ListView(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.only(left: 16, right: 16),
                 shrinkWrap: true,
                 children: <Widget>[
                   PokemonTypeChipWidget(chip: chip),

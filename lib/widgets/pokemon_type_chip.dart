@@ -26,7 +26,7 @@ class PokemonTypeChipWidget extends StatelessWidget {
       disabledTextColor: chip.textColor,
       child: Text(
         chip.name,
-        style: TextStyle(fontSize: 20),
+        style: TextStyle(fontSize: 16),
       ),
     );
   }
