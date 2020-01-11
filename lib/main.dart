@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pogo_diary/blocs/pokemon_types_bloc.dart';
 import 'package:pogo_diary/pages/home.dart';
 
 import 'blocs/bloc_provider.dart';
+import 'blocs/pokemon_type_chips_bloc.dart';
 
 Future<void> main() async {
 //  debugPrintRebuildDirtyWidgets = true;
@@ -13,8 +13,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<PokemonTypesBloc>(
-        bloc: PokemonTypesBloc(),
+    return BlocProvider<PokemonTypeChipsBloc>(
+        bloc: PokemonTypeChipsBloc(),
         child: MaterialApp(
           title: 'Movies',
           theme: ThemeData(
