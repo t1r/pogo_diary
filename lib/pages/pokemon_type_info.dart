@@ -21,9 +21,26 @@ class PokemonTypeInfoPage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            PokemonTypeChipWidget(chip: chip)
+            PokemonTypeChipWidget(chip: chip),
+            Text("Vulnerable"),
+            ListView(
+                padding: const EdgeInsets.all(16),
+                shrinkWrap: true,
+                children: <Widget>[
+                  PokemonTypeChipWidget(chip: chip),
+                  PokemonTypeChipWidget(chip: chip),
+                  PokemonTypeChipWidget(chip: chip)
+                ]),
+            Text("Resistant"),
+            ListView(
+                padding: const EdgeInsets.all(16),
+                shrinkWrap: true,
+                children: <Widget>[
+                  PokemonTypeChipWidget(chip: chip),
+                  PokemonTypeChipWidget(chip: chip),
+                  PokemonTypeChipWidget(chip: chip)
+                ]),
           ],
         ),
       ),
