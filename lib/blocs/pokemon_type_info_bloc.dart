@@ -7,19 +7,14 @@ import 'package:pogo_diary/data/pokemon_types.dart';
 class PokemonTypeInfoBloc implements BlocBase {
   final _typesDs = PokemonTypesDataSource();
 
-  StreamController<PokemonType> _actionController =
-      StreamController<PokemonType>();
+  StreamController<PokemonType> _actionController = StreamController<PokemonType>();
   StreamSink get fetchPokemonInfoByType => _actionController.sink;
 
-  StreamController<List<PokemonTypeChip>> _valnurableTypesController =
-      StreamController<List<PokemonTypeChip>>();
-  // StreamSink<List<PokemonTypeChip>> get _inType => _typesController.sink;
+  StreamController<List<PokemonTypeChip>> _valnurableTypesController = StreamController<List<PokemonTypeChip>>();
   Stream<List<PokemonTypeChip>> get outValnurableTypeInfo =>
       _valnurableTypesController.stream;
 
-  StreamController<List<PokemonTypeChip>> _resistantTypesController =
-      StreamController<List<PokemonTypeChip>>();
-  // StreamSink<List<PokemonTypeChip>> get _inType => _typesController.sink;
+  StreamController<List<PokemonTypeChip>> _resistantTypesController = StreamController<List<PokemonTypeChip>>();
   Stream<List<PokemonTypeChip>> get outResistantTypeInfo =>
       _resistantTypesController.stream;
 
@@ -37,8 +32,7 @@ class PokemonTypeInfoBloc implements BlocBase {
   void _emitValnurables(List<double> typeValues) {
     final typesMap = typeValues.asMap();
     typesMap.removeWhere((i, value) => value <= 0);
-    final filtredTypes =
-        typesMap.keys.map((index) => PokemonType.values[index]);
+    final filtredTypes = typesMap.keys.map((index) => PokemonType.values[index]);
 
     final valnurableList = _typesDs.pokemonTypeChips
         .where((chip) => filtredTypes.contains(chip.pokemonType))
@@ -50,8 +44,7 @@ class PokemonTypeInfoBloc implements BlocBase {
   void _emitResistants(List<double> typeValues) {
     final typesMap = typeValues.asMap();
     typesMap.removeWhere((i, value) => value >= 0);
-    final filtredTypes =
-        typesMap.keys.map((index) => PokemonType.values[index]);
+    final filtredTypes = typesMap.keys.map((index) => PokemonType.values[index]);
 
     final resistantList = _typesDs.pokemonTypeChips
         .where((chip) => filtredTypes.contains(chip.pokemonType))
