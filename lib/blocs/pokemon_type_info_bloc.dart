@@ -11,12 +11,10 @@ class PokemonTypeInfoBloc implements BlocBase {
   StreamSink get fetchPokemonInfoByType => _actionController.sink;
 
   StreamController<List<PokemonTypeChip>> _valnurableTypesController = StreamController<List<PokemonTypeChip>>();
-  Stream<List<PokemonTypeChip>> get outValnurableTypeInfo =>
-      _valnurableTypesController.stream;
+  Stream<List<PokemonTypeChip>> get outValnurableTypeInfo => _valnurableTypesController.stream;
 
   StreamController<List<PokemonTypeChip>> _resistantTypesController = StreamController<List<PokemonTypeChip>>();
-  Stream<List<PokemonTypeChip>> get outResistantTypeInfo =>
-      _resistantTypesController.stream;
+  Stream<List<PokemonTypeChip>> get outResistantTypeInfo => _resistantTypesController.stream;
 
   PokemonTypeInfoBloc() {
     _actionController.stream.listen(_emitTypeInfo);

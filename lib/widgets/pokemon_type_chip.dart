@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pogo_diary/blocs/bloc_provider.dart';
+import 'package:pogo_diary/blocs/pokemon_type_info_bloc.dart';
 import 'package:pogo_diary/data/pokemon_type_value.dart';
 import 'package:pogo_diary/pages/pokemon_type_info.dart';
 
@@ -17,7 +19,10 @@ class PokemonTypeChipWidget extends StatelessWidget {
       onPressed: () {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (BuildContext context) {
-          return PokemonTypeInfoPage(chip: chip);
+          return BlocProvider<PokemonTypeInfoBloc>(
+            bloc: PokemonTypeInfoBloc(),
+            child: PokemonTypeInfoPage(chip: chip),
+          );
         }));
       },
       color: chip.backgroundColor,
