@@ -17,6 +17,8 @@ class PokemonTypeInfoBloc implements BlocBase {
   Stream<List<PokemonTypeChip>> get outResistantTypeInfo => _resistantTypesController.stream;
 
   PokemonTypeInfoBloc() {
+    _valnurableTypesController.add([]);
+    _resistantTypesController.add([]);
     _actionController.stream.listen(_emitTypeInfo);
   }
 
