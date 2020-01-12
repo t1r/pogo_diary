@@ -5,7 +5,7 @@ import 'blocs/bloc_provider.dart';
 import 'blocs/pokemon_type_chips_bloc.dart';
 
 Future<void> main() async {
-  debugPrintRebuildDirtyWidgets = true;
+  // debugPrintRebuildDirtyWidgets = true;
   return runApp(MyApp());
 }
 
