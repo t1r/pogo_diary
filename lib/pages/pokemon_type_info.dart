@@ -29,7 +29,10 @@ class PokemonTypeInfoPage extends StatelessWidget {
             PokemonTypeChipWidget(chip: chip),
             Padding(padding: EdgeInsets.only(top: 16)),
             Text("Weak to",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                style: TextStyle(
+                    color: Color(0xFFa7514c),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18)),
             StreamBuilder<List<PokemonTypeChip>>(
                 stream: infoBloc.outValnurableTypeInfo,
                 initialData: [],
@@ -44,7 +47,10 @@ class PokemonTypeInfoPage extends StatelessWidget {
                 }),
             Padding(padding: EdgeInsets.only(top: 16)),
             Text("Resists to",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                style: TextStyle(
+                    color: Color(0xFF1a751a),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18)),
             StreamBuilder<List<PokemonTypeChip>>(
                 stream: infoBloc.outResistantTypeInfo,
                 initialData: [],
