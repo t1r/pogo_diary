@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:pogo_diary/blocs/bloc_provider.dart';

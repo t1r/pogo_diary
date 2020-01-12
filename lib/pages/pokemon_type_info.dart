@@ -26,7 +26,7 @@ class PokemonTypeInfoPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Padding(padding: EdgeInsets.only(top: 16)),
-            PokemonTypeChipWidget(chip: chip),
+            PokemonTypeChipWidget(chip: chip, onPressed: null),
             Padding(padding: EdgeInsets.only(top: 16)),
             Text("Weak to",
                 style: TextStyle(
@@ -42,7 +42,7 @@ class PokemonTypeInfoPage extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 16, right: 16),
                       shrinkWrap: true,
                       children: snapshot.data
-                          .map((c) => PokemonTypeChipWidget(chip: c))
+                          .map((c) => PokemonTypeChipWidget(chip: c, onPressed: null))
                           .toList());
                 }),
             Padding(padding: EdgeInsets.only(top: 16)),
@@ -60,7 +60,7 @@ class PokemonTypeInfoPage extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 16, right: 16),
                       shrinkWrap: true,
                       children: snapshot.data
-                          .map((c) => PokemonTypeChipWidget(chip: c))
+                          .map((c) => PokemonTypeChipWidget(chip: c, onPressed: null))
                           .toList());
                 }),
           ],

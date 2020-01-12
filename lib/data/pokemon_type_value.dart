@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:pogo_diary/data/pokemon_types.dart';

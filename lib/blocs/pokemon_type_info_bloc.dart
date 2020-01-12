@@ -26,7 +26,7 @@ class PokemonTypeInfoBloc implements BlocBase {
   void _emitTypeInfo(PokemonType type) {
     var index = PokemonType.values.indexOf(type);
     var typeValues = _typesDs.pokemonTypeValues.map((f)=> f[index]).toList();
-    developer.log('typeValues ${typeValues.length} ${typeValues}');
+
     _emitValnurables(typeValues);
     _emitResistants(typeValues);
   }
@@ -47,8 +47,7 @@ class PokemonTypeInfoBloc implements BlocBase {
     final resultList = _typesDs.pokemonTypeChips
         .where((chip) => filtredTypes.contains(chip.pokemonType))
         .toList();
-
-    developer.log('resultList ${resultList.length} ${resultList.map((f)=> f.name)}');
+        
     return resultList;
   }
 
