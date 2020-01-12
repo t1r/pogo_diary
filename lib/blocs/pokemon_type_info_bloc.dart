@@ -24,36 +24,32 @@ class PokemonTypeInfoBloc implements BlocBase {
   }
 
   void _emitTypeInfo(PokemonType type) {
-    var index = PokemonType.values.indexOf(PokemonType.Steel);
-    var typeValues = _typesDs.pokemonTypeValues[index];
+    var index = PokemonType.values.indexOf(type);
+    var typeValues = _typesDs.pokemonTypeValues.map((f)=> f[index]).toList();
+    developer.log('typeValues ${typeValues.length} ${typeValues}');
     _emitValnurables(typeValues);
     _emitResistants(typeValues);
   }
 
   void _emitValnurables(List<double> typeValues) {
-    final typesMap = Map.from(typeValues.asMap());
-    typesMap.removeWhere((i, value) => value <= 1);
-    final filtredTypes = typesMap.keys.map((index) => PokemonType.values[index]);
-
-    final valnurableList = _typesDs.pokemonTypeChips
-        .where((chip) => filtredTypes.contains(chip.pokemonType))
-        .toList();
-
-    developer.log('valnurableList ${valnurableList.length} ${valnurableList.map((f)=> f.name)}');
-    _valnurableTypesController.add(valnurableList);
+    _valnurableTypesController.add(_emitData(typeValues, (i, value) => value <= 1));
   }
 
   void _emitResistants(List<double> typeValues) {
+    _resistantTypesController.add(_emitData(typeValues, (i, value) => value >= 1));
+  }
+
+  List<PokemonTypeChip> _emitData(List<double> typeValues, bool predicate(dynamic key, dynamic value)) {    
     final typesMap = Map.from(typeValues.asMap());
-    typesMap.removeWhere((i, value) => value >= 1);
+    typesMap.removeWhere(predicate);
     final filtredTypes = typesMap.keys.map((index) => PokemonType.values[index]);
 
-    final resistantList = _typesDs.pokemonTypeChips
+    final resultList = _typesDs.pokemonTypeChips
         .where((chip) => filtredTypes.contains(chip.pokemonType))
         .toList();
 
-    developer.log('resistantList ${resistantList.length} ${resistantList.map((f)=> f.name)}');
-    _resistantTypesController.add(resistantList);
+    developer.log('resultList ${resultList.length} ${resultList.map((f)=> f.name)}');
+    return resultList;
   }
 
   @override
