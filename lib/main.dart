@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pogo_diary/pages/home.dart';
+import 'package:pogo_diary/pages/pokemon_types_page.dart';
 
 import 'blocs/bloc_provider.dart';
 import 'blocs/pokemon_type_chips_bloc.dart';
@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
     return BlocProvider<PokemonTypeChipsBloc>(
         bloc: PokemonTypeChipsBloc(),
         child: MaterialApp(
-          title: 'Movies',
+          title: 'PoGo Diary',
           theme: PoGoDiaryTheme.theme,
-          home: HomePage(),
+          home: PokemonTypesPage(),
         ));
   }
 }

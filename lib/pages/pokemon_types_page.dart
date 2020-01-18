@@ -3,10 +3,10 @@ import 'package:pogo_diary/blocs/bloc_provider.dart';
 import 'package:pogo_diary/blocs/pokemon_type_chips_bloc.dart';
 import 'package:pogo_diary/blocs/pokemon_type_info_bloc.dart';
 import 'package:pogo_diary/data/pokemon_type_chips.dart';
-import 'package:pogo_diary/pages/pokemon_type_info.dart';
+import 'package:pogo_diary/pages/pokemon_type_info_page.dart';
 import 'package:pogo_diary/widgets/pokemon_type_chip.dart';
 
-class HomePage extends StatelessWidget {
+class PokemonTypesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PokemonTypeChipsBloc typesBloc =
@@ -32,20 +32,21 @@ class HomePage extends StatelessWidget {
                 children: snapshot.data.map((t) {
                   return PokemonTypeChipWidget(
                     chip: t,
-                    onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return BlocProvider<PokemonTypeInfoBloc>(
-                          bloc: PokemonTypeInfoBloc(),
-                          child: PokemonTypeInfoPage(chip: t),
-                        );
-                      }));
-                    },
+                    onPressed: () { _navigateToTypeInfo(context, t); },
                   );
                 }).toList(),
               );
             }),
       ),
     );
+  }
+
+  void _navigateToTypeInfo(BuildContext context, PokemonTypeChip chip) {    
+    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+      return BlocProvider<PokemonTypeInfoBloc>(
+        bloc: PokemonTypeInfoBloc(),
+        child: PokemonTypeInfoPage(chip: chip),
+      );
+    }));
   }
 }
