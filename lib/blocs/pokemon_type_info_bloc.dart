@@ -4,6 +4,7 @@ import 'package:pogo_diary/blocs/bloc_provider.dart';
 import 'package:pogo_diary/data/pokemon_type_chips.dart';
 import 'package:pogo_diary/data/pokemon_type_value.dart';
 import 'package:pogo_diary/data/pokemon_types.dart';
+import 'dart:developer' as developer;
 
 class PokemonTypeInfoBloc implements BlocBase {
   final _typesDs = PokemonTypesDataSource();
@@ -25,30 +26,29 @@ class PokemonTypeInfoBloc implements BlocBase {
   }
 
   void _emitTypeInfo(PokemonType type) {
-    var index = PokemonType.values.indexOf(type);
-    var typeValues = _typesDs.pokemonTypeValues.map((f)=> f[index]).toList();
+    var typeValues = _typesDs.pokemonTypeValues[type];
 
     _emitValnurables(typeValues);
     _emitResistants(typeValues);
   }
 
-  void _emitValnurables(List<double> typeValues) {
-    _valnurableTypesController.add(_emitData(typeValues, (i, value) => value <= 1));
+  void _emitValnurables(Map<PokemonType, double> typeValues) {
+    _valnurableTypesController.add(_mapDataToEmit(typeValues, (type, value)=> value < 1));
   }
 
-  void _emitResistants(List<double> typeValues) {
-    _resistantTypesController.add(_emitData(typeValues, (i, value) => value >= 1));
+  void _emitResistants(Map<PokemonType, double> typeValues) {
+    _resistantTypesController.add(_mapDataToEmit(typeValues, (type, value)=> value > 1));
   }
 
-  List<PokemonTypeChip> _emitData(List<double> typeValues, bool predicate(dynamic key, dynamic value)) {    
-    final typesMap = Map.from(typeValues.asMap());
-    typesMap.removeWhere(predicate);
-    final filtredTypes = typesMap.keys.map((index) => PokemonType.values[index]);
+  List<PokemonTypeChip> _mapDataToEmit(Map<PokemonType, double> typeValues, bool removePredicate(dynamic key, dynamic value)) {
+    final typesMap = Map.from(typeValues);
+    typesMap.removeWhere(removePredicate);
+    final filtredTypes = typesMap.keys;
 
     final resultList = _typeChipsDs.pokemonTypeChips
         .where((chip) => filtredTypes.contains(chip.pokemonType))
         .toList();
-        
+
     return resultList;
   }
 
