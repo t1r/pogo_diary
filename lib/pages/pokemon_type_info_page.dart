@@ -14,8 +14,7 @@ class PokemonTypeInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PokemonTypeInfoBloc infoBloc =
-        BlocProvider.of<PokemonTypeInfoBloc>(context);
+    final PokemonTypeInfoBloc infoBloc = BlocProvider.of<PokemonTypeInfoBloc>(context);
     infoBloc.fetchPokemonInfoByType.add(chip.pokemonType);
 
     return Scaffold(
@@ -29,40 +28,71 @@ class PokemonTypeInfoPage extends StatelessWidget {
             PokemonTypeChipWidget(chip: chip, onPressed: null),
             Padding(padding: EdgeInsets.only(top: 16)),
             Text("Weak to",
-                style: TextStyle(
-                    color: Color(0xFFa7514c),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18)),
+              style: TextStyle(
+                color: Color(0xFFa7514c),
+                fontWeight: FontWeight.bold,
+                fontSize: 18)),
             StreamBuilder<List<PokemonTypeChip>>(
-                stream: infoBloc.outValnurableTypeInfo,
-                initialData: [],
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<PokemonTypeChip>> snapshot) {
-                  return ListView(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
-                      shrinkWrap: true,
-                      children: snapshot.data
-                          .map((c) => PokemonTypeChipWidget(chip: c, onPressed: null))
-                          .toList());
-                }),
-            Padding(padding: EdgeInsets.only(top: 16)),
-            Text("Resists to",
-                style: TextStyle(
-                    color: Color(0xFF1a751a),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18)),
+              stream: infoBloc.outValnurableTypeInfo,
+              initialData: [],
+              builder: (BuildContext context, AsyncSnapshot<List<PokemonTypeChip>> snapshot) {
+                return ListView(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    shrinkWrap: true,
+                    children: snapshot.data
+                        .map((c) => PokemonTypeChipWidget(chip: c, onPressed: null))
+                        .toList());
+              }),
             StreamBuilder<List<PokemonTypeChip>>(
-                stream: infoBloc.outResistantTypeInfo,
-                initialData: [],
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<PokemonTypeChip>> snapshot) {
-                  return ListView(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
-                      shrinkWrap: true,
-                      children: snapshot.data
-                          .map((c) => PokemonTypeChipWidget(chip: c, onPressed: null))
-                          .toList());
-                }),
+              stream: infoBloc.outResistantTypeInfo,
+              initialData: [],
+              builder: (BuildContext context, AsyncSnapshot<List<PokemonTypeChip>> snapshot) {
+                return Column(children: <Widget>[          
+                Visibility(
+                  child: Padding(padding: EdgeInsets.only(top: 16)),
+                  visible: snapshot.data.isNotEmpty,
+                ),
+                Visibility(
+                  child: Text("Resists to",
+                    style: TextStyle(
+                      color: Color(0xFF1a751a),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18)),
+                  visible: snapshot.data.isNotEmpty,
+                ),
+                ListView(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  shrinkWrap: true,
+                  children: snapshot.data
+                    .map((c) => PokemonTypeChipWidget(chip: c, onPressed: null))
+                    .toList()),
+                ],);
+              }),
+            StreamBuilder<List<PokemonTypeChip>>(
+              stream: infoBloc.outImmuneTypeInfo,
+              initialData: [],
+              builder: (BuildContext context, AsyncSnapshot<List<PokemonTypeChip>> snapshot) {
+                return Column(children: <Widget>[          
+                Visibility(
+                  child: Padding(padding: EdgeInsets.only(top: 16)),
+                  visible: snapshot.data.isNotEmpty,
+                ),
+                Visibility(
+                  child: Text("Immune to",
+                    style: TextStyle(
+                      color: Color(0xFF585858),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18)),
+                  visible: snapshot.data.isNotEmpty,
+                ),
+                ListView(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  shrinkWrap: true,
+                  children: snapshot.data
+                    .map((c) => PokemonTypeChipWidget(chip: c, onPressed: null))
+                    .toList()),
+                ],);
+              }),
           ],
         ),
       ),

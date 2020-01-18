@@ -19,9 +19,13 @@ class PokemonTypeInfoBloc implements BlocBase {
   StreamController<List<PokemonTypeChip>> _resistantTypesController = StreamController<List<PokemonTypeChip>>();
   Stream<List<PokemonTypeChip>> get outResistantTypeInfo => _resistantTypesController.stream;
 
+  StreamController<List<PokemonTypeChip>> _immuneTypesController = StreamController<List<PokemonTypeChip>>();
+  Stream<List<PokemonTypeChip>> get outImmuneTypeInfo => _immuneTypesController.stream;
+
   PokemonTypeInfoBloc() {
     _valnurableTypesController.add([]);
     _resistantTypesController.add([]);
+    _immuneTypesController.add([]);
     _actionController.stream.listen(_emitTypeInfo);
   }
 
@@ -30,14 +34,19 @@ class PokemonTypeInfoBloc implements BlocBase {
 
     _emitValnurables(typeValues);
     _emitResistants(typeValues);
+    _emitImmunes(typeValues);
   }
 
   void _emitValnurables(Map<PokemonType, double> typeValues) {
-    _valnurableTypesController.add(_mapDataToEmit(typeValues, (type, value)=> value < 1));
+    _valnurableTypesController.add(_mapDataToEmit(typeValues, (type, value)=> value < PokemonTypesDataSource.WEAK));
   }
 
   void _emitResistants(Map<PokemonType, double> typeValues) {
-    _resistantTypesController.add(_mapDataToEmit(typeValues, (type, value)=> value > 1));
+    _resistantTypesController.add(_mapDataToEmit(typeValues, (type, value)=> value != PokemonTypesDataSource.RESISTANT));
+  }
+
+  void _emitImmunes(Map<PokemonType, double> typeValues) {
+    _immuneTypesController.add(_mapDataToEmit(typeValues, (type, value)=> value > PokemonTypesDataSource.VERY_RESISTANT));
   }
 
   List<PokemonTypeChip> _mapDataToEmit(Map<PokemonType, double> typeValues, bool removePredicate(dynamic key, dynamic value)) {
@@ -57,5 +66,6 @@ class PokemonTypeInfoBloc implements BlocBase {
     _actionController.close();
     _valnurableTypesController.close();
     _resistantTypesController.close();
+    _immuneTypesController.close();
   }
 }
