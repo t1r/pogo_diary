@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pogo_diary/pages/home.dart';
+import 'package:pogo_diary/pages/pokemon_types_page.dart';
 
 import 'blocs/bloc_provider.dart';
 import 'blocs/pokemon_type_chips_bloc.dart';
+import 'core/theme.dart';
 
 Future<void> main() async {
   return runApp(MyApp());
@@ -14,11 +15,9 @@ class MyApp extends StatelessWidget {
     return BlocProvider<PokemonTypeChipsBloc>(
         bloc: PokemonTypeChipsBloc(),
         child: MaterialApp(
-          title: 'Movies',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home: HomePage(),
+          title: 'PoGo Diary',
+          theme: PoGoDiaryTheme.theme,
+          home: PokemonTypesPage(),
         ));
   }
 }

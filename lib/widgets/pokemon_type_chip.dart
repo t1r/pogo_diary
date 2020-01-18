@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pogo_diary/data/pokemon_type_value.dart';
+import 'package:pogo_diary/data/pokemon_type_chips.dart';
 
 class PokemonTypeChipWidget extends StatelessWidget {
   final PokemonTypeChip chip;

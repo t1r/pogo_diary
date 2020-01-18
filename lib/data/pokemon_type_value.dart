@@ -1,135 +1,190 @@
-import 'dart:ui';
-
 import 'package:pogo_diary/data/pokemon_types.dart';
 
 class PokemonTypesDataSource {
-  static const whiteColor = Color(0xFFffffff);
+  static const RESISTANT = 0.625;
+  static const VERY_RESISTANT = 0.39;
+  static const WEAK = 1.6;
 
-  final pokemonTypeValues = const <List<double>>[
-    const <double>[1, 1, 1, 1, 1, 0.8, 1, 0.8, 0.8, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    const <double>[1.25, 1, 0.8, 0.8, 1, 1.25, 0.8, 0.8, 1,25, 1, 1, 1, 1, 0.8, 1.25, 1, 0.8],
-    const <double>[1, 1.25, 1, 1, 1, 0.8, 1.25, 1, 0.8, 1, 1, 1.25, 0.8, 1, 1, 1, 1, 1],
-    const <double>[1, 1, 1, 0.8, 0.8, 0.8, 1, 0.8, 0.8, 1, 1, 1.25, 1, 1, 1, 1, 1, 1.25],
-    const <double>[1, 1, 0.8, 1.25, 1, 1.25, 0.8, 1, 1.25, 1.25, 1, 0.8, 1.25, 1, 1, 1, 1, 1],
-    const <double>[1, 0.8, 1.25, 1, 0.8, 1, 1.25, 1, 0.8, 1.25, 1, 1, 1, 1, 1.25, 1, 1, 1],
-    const <double>[1, 0.8, 0.8, 0.8, 1, 1, 1, 0.8, 0.8, 0.8, 1, 1.25, 1, 1.25, 1, 1, 1.25, 0.8],
-    const <double>[0.8, 1, 1, 1, 1, 1, 1, 1.25, 1, 1, 1, 1, 1, 1.25, 1, 1, 0.8, 1],
-    const <double>[1, 1, 1, 1, 1, 1.25, 1, 1, 0.8, 0.8, 0.8, 1, 0.8, 1, 1.25, 1, 1, 1.25],
-    const <double>[1, 1, 1, 1, 1, 0.8, 1.25, 1, 1.25, 0.8, 0.8, 1.25, 1, 1, 1.25, 0.8, 1, 1],
-    const <double>[1, 1, 1, 1, 1.25, 1.25, 1, 1, 1, 1.25, 0.8, 0.8, 1, 1, 1, 0.8, 1, 1],
-    const <double>[1, 1, 0.8, 0.8, 1.25, 1.25, 0.8, 1,  0.8, 0.8, 1.25, 0.8, 1, 1, 1, 0.8, 1, 1],
-    const <double>[1, 1, 1.25, 1, 0.8, 1, 1, 1, 1, 1, 1.25, 0.8, 0.8, 1, 1,  0.8, 1, 1],
-    const <double>[1, 1.25, 1, 1.25, 1, 1, 1, 1, 0.8, 1, 1, 1, 1, 0.8, 1, 1, 0.8, 1],
-    const <double>[1, 1, 1.25, 1, 1.25, 1, 1, 1, 0.8, 0.8, 0.8, 1.25, 1, 1, 0.8, 1.25, 1, 1],
-    const <double>[1, 1, 1, 1, 1, 1, 1, 1, 0.8, 0.8, 0.8, 1.25, 1, 1, 0.8, 1.25, 1, 1],
-    const <double>[1, 0.8, 1, 1, 1, 1, 1, 1.25, 1, 1, 1, 1, 1, 1.25, 1, 1, 0.8, 0.8],
-    const <double>[1, 1.25, 1, 0.8, 1, 1, 1, 1, 0.8, 0.8, 1, 1, 1, 1, 1, 1.25, 1.25, 1],
-  ];
+  final pokemonTypeValues = Map.fromEntries([
+    bugEntry, darkEntry, dragonEntry,
+    electricEntry, fairyEntry, fightingEntry,
+    fireEntry, flyingEntry, ghostEntry, 
+    grassEntry, groundEntry, iceEntry, 
+    normalEntry, poisonEntry, psychicEntry, 
+    rockEntry, steelEntry, waterEntry
+    ]);
 
-  final pokemonTypeChips = <PokemonTypeChip>[
-    PokemonTypeChip(
-      pokemonType: PokemonType.Normal,
-      name: 'Normal', 
-      backgroundColor: Color(0xFFa8a878), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Fighting,
-      name: 'Fighting', 
-      backgroundColor: Color(0xFFc03028), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Flying,
-      name: 'Flying', 
-      backgroundColor: Color(0xFFa890f0), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Poison,
-      name: 'Poison', 
-      backgroundColor: Color(0xFFb55aa5), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Ground,
-      name: 'Ground', 
-      backgroundColor: Color(0xFFe0c068), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Rock,
-      name: 'Rock', 
-      backgroundColor: Color(0xFFbda55a), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Bug,
-      name: 'Bug', 
-      backgroundColor: Color(0xFFa8b820), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Ghost,
-      name: 'Ghost', 
-      backgroundColor: Color(0xFF6363b5), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Steel,
-      name: 'Steel', 
-      backgroundColor: Color(0xFFb8b8d0), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Fire,
-      name: 'Fire', 
-      backgroundColor: Color(0xFFf08030), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Water,
-      name: 'Water', 
-      backgroundColor: Color(0xFF6890f0), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Grass,
-      name: 'Grass', 
-      backgroundColor: Color(0xFF78c850), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Electric,
-      name: 'Electric', 
-      backgroundColor: Color(0xFFf8d030), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Psychic,
-      name: 'Psychic', 
-      backgroundColor: Color(0xFFf85888), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Ice,
-      name: 'Ice', 
-      backgroundColor: Color(0xFF98d8d8), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Dragon,
-      name: 'Dragon', 
-      backgroundColor: Color(0xFF7038f8), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Dark,
-      name: 'Dark', 
-      backgroundColor: Color(0xFF735a4a), 
-      textColor: whiteColor),
-    PokemonTypeChip(
-      pokemonType: PokemonType.Fairy,
-      name: 'Fairy', 
-      backgroundColor: Color(0xFFee99ac), 
-      textColor: whiteColor),
-  ];
-}
+  static MapEntry<PokemonType, Map<PokemonType, double>> bugEntry  = MapEntry(PokemonType.Bug, {
+    PokemonType.Fighting : RESISTANT,
+    PokemonType.Grass : RESISTANT,
+    PokemonType.Ground : RESISTANT,
+    PokemonType.Fire : WEAK,
+    PokemonType.Flying : WEAK,
+    PokemonType.Rock : WEAK,
+  });  
 
-class PokemonTypeChip {
-  final PokemonType pokemonType;
-  final String name;
-  final Color textColor;
-  final Color backgroundColor;
+  static MapEntry<PokemonType, Map<PokemonType, double>> darkEntry  = MapEntry(PokemonType.Dark, {
+    PokemonType.Dark : RESISTANT,
+    PokemonType.Ghost : RESISTANT,
+    PokemonType.Psychic : VERY_RESISTANT,
+    PokemonType.Bug : WEAK,
+    PokemonType.Fighting : WEAK,
+    PokemonType.Fairy : WEAK,
+  });  
 
-  PokemonTypeChip({
-    this.pokemonType,
-    this.name,
-    this.textColor,
-    this.backgroundColor,
+  static MapEntry<PokemonType, Map<PokemonType, double>> dragonEntry  = MapEntry(PokemonType.Dragon, {
+    PokemonType.Electric : RESISTANT,
+    PokemonType.Fire : RESISTANT,
+    PokemonType.Grass : RESISTANT,
+    PokemonType.Water : RESISTANT,
+    PokemonType.Dragon : WEAK,
+    PokemonType.Fairy : WEAK,
+    PokemonType.Ice : WEAK,
+  });  
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> electricEntry  = MapEntry(PokemonType.Electric, {
+    PokemonType.Electric : RESISTANT,
+    PokemonType.Flying : RESISTANT,
+    PokemonType.Steel : RESISTANT,
+    PokemonType.Ground : WEAK,
+  }); 
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> fairyEntry  = MapEntry(PokemonType.Fairy, {
+    PokemonType.Bug : RESISTANT,
+    PokemonType.Dark : RESISTANT,
+    PokemonType.Fighting : RESISTANT,
+    PokemonType.Dragon : VERY_RESISTANT,
+    PokemonType.Poison : WEAK,
+    PokemonType.Steel : WEAK,
+  }); 
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> fightingEntry  = MapEntry(PokemonType.Fighting, {
+    PokemonType.Bug : RESISTANT,
+    PokemonType.Dark : RESISTANT,
+    PokemonType.Rock : RESISTANT,
+    PokemonType.Fairy : WEAK,
+    PokemonType.Flying : WEAK,
+    PokemonType.Psychic : WEAK,
+  }); 
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> fireEntry  = MapEntry(PokemonType.Fire, {
+    PokemonType.Bug : RESISTANT,
+    PokemonType.Fire : RESISTANT,
+    PokemonType.Fairy : RESISTANT,
+    PokemonType.Grass : RESISTANT,
+    PokemonType.Ice : RESISTANT,
+    PokemonType.Steel : RESISTANT,
+    PokemonType.Ground : WEAK,
+    PokemonType.Rock : WEAK,
+    PokemonType.Water : WEAK,
+  });  
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> flyingEntry  = MapEntry(PokemonType.Flying, {
+    PokemonType.Bug : RESISTANT,
+    PokemonType.Fighting : RESISTANT,
+    PokemonType.Grass : RESISTANT,
+    PokemonType.Ground : VERY_RESISTANT,
+    PokemonType.Electric : WEAK,
+    PokemonType.Ice : WEAK,
+    PokemonType.Rock : WEAK,
   });
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> ghostEntry  = MapEntry(PokemonType.Ghost, {
+    PokemonType.Bug : RESISTANT,
+    PokemonType.Poison : RESISTANT,
+    PokemonType.Fighting : VERY_RESISTANT,
+    PokemonType.Normal : VERY_RESISTANT,
+    PokemonType.Dark : WEAK,
+    PokemonType.Ghost : WEAK,
+  });
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> grassEntry  = MapEntry(PokemonType.Grass, {
+    PokemonType.Electric : RESISTANT,
+    PokemonType.Grass : RESISTANT,
+    PokemonType.Ground : RESISTANT,
+    PokemonType.Water : RESISTANT,
+    PokemonType.Bug : WEAK,
+    PokemonType.Fire : WEAK,
+    PokemonType.Flying : WEAK,
+    PokemonType.Ice : WEAK,
+    PokemonType.Poison : WEAK,
+  });
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> groundEntry  = MapEntry(PokemonType.Ground, {
+    PokemonType.Poison : RESISTANT,
+    PokemonType.Rock : RESISTANT,
+    PokemonType.Electric : VERY_RESISTANT,
+    PokemonType.Grass : WEAK,
+    PokemonType.Ice : WEAK,
+    PokemonType.Water : WEAK,
+  });
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> iceEntry  = MapEntry(PokemonType.Ice, {
+    PokemonType.Ice : RESISTANT,
+    PokemonType.Fighting : WEAK,
+    PokemonType.Fire : WEAK,
+    PokemonType.Rock : WEAK,
+    PokemonType.Steel : WEAK,
+  });  
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> normalEntry  = MapEntry(PokemonType.Normal, {
+    PokemonType.Ghost : VERY_RESISTANT,
+    PokemonType.Fighting : WEAK,
+  }); 
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> poisonEntry  = MapEntry(PokemonType.Poison, {
+    PokemonType.Bug : RESISTANT,
+    PokemonType.Fighting : RESISTANT,
+    PokemonType.Fairy : RESISTANT,
+    PokemonType.Grass : RESISTANT,
+    PokemonType.Poison : RESISTANT,
+    PokemonType.Ground : WEAK,
+    PokemonType.Psychic : WEAK,
+  }); 
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> psychicEntry  = MapEntry(PokemonType.Psychic, {
+    PokemonType.Fighting : RESISTANT,
+    PokemonType.Psychic : RESISTANT,
+    PokemonType.Bug : WEAK,
+    PokemonType.Dark : WEAK,
+    PokemonType.Ghost : WEAK,
+  }); 
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> rockEntry  = MapEntry(PokemonType.Rock, {
+    PokemonType.Fire : RESISTANT,
+    PokemonType.Flying : RESISTANT,
+    PokemonType.Normal : RESISTANT,
+    PokemonType.Poison : RESISTANT,
+    PokemonType.Fighting : WEAK,
+    PokemonType.Grass : WEAK,
+    PokemonType.Ground : WEAK,
+    PokemonType.Steel : WEAK,
+    PokemonType.Water : WEAK,
+  }); 
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> steelEntry  = MapEntry(PokemonType.Steel, {
+    PokemonType.Bug : RESISTANT,
+    PokemonType.Dragon : RESISTANT,
+    PokemonType.Flying : RESISTANT,
+    PokemonType.Fairy : RESISTANT,
+    PokemonType.Grass : RESISTANT,
+    PokemonType.Ice : RESISTANT,
+    PokemonType.Normal : RESISTANT,
+    PokemonType.Psychic : RESISTANT,
+    PokemonType.Rock : RESISTANT,
+    PokemonType.Steel : RESISTANT,
+    PokemonType.Poison : VERY_RESISTANT,
+    PokemonType.Fighting : WEAK,
+    PokemonType.Fire : WEAK,
+    PokemonType.Ground : WEAK,
+  }); 
+
+  static MapEntry<PokemonType, Map<PokemonType, double>> waterEntry  = MapEntry(PokemonType.Water, {
+    PokemonType.Fire : RESISTANT,
+    PokemonType.Ice : RESISTANT,
+    PokemonType.Steel : RESISTANT,
+    PokemonType.Water : RESISTANT,
+    PokemonType.Electric : WEAK,
+    PokemonType.Grass : WEAK,
+  });  
 }
