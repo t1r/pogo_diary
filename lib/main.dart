@@ -3,6 +3,7 @@ import 'package:pogo_diary/pages/home.dart';
 
 import 'blocs/bloc_provider.dart';
 import 'blocs/pokemon_type_chips_bloc.dart';
+import 'core/theme.dart';
 
 Future<void> main() async {
   return runApp(MyApp());
@@ -15,9 +16,7 @@ class MyApp extends StatelessWidget {
         bloc: PokemonTypeChipsBloc(),
         child: MaterialApp(
           title: 'Movies',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+          theme: PoGoDiaryTheme.theme,
           home: HomePage(),
         ));
   }
