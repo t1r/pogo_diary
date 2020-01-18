@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pogo_diary/blocs/bloc_provider.dart';
 import 'package:pogo_diary/blocs/pokemon_type_info_bloc.dart';
-import 'package:pogo_diary/data/pokemon_type_value.dart';
+import 'package:pogo_diary/data/pokemon_type_chips.dart';
 import 'package:pogo_diary/widgets/pokemon_type_chip.dart';
 
 class PokemonTypeInfoPage extends StatelessWidget {

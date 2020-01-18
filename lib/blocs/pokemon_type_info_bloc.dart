@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:pogo_diary/blocs/bloc_provider.dart';
+import 'package:pogo_diary/data/pokemon_type_chips.dart';
 import 'package:pogo_diary/data/pokemon_type_value.dart';
 import 'package:pogo_diary/data/pokemon_types.dart';
-import 'dart:developer' as developer;
 
 class PokemonTypeInfoBloc implements BlocBase {
   final _typesDs = PokemonTypesDataSource();
+  final _typeChipsDs = PokemonTypeChipsDataSource();
 
   StreamController<PokemonType> _actionController = StreamController<PokemonType>();
   StreamSink get fetchPokemonInfoByType => _actionController.sink;
@@ -44,7 +45,7 @@ class PokemonTypeInfoBloc implements BlocBase {
     typesMap.removeWhere(predicate);
     final filtredTypes = typesMap.keys.map((index) => PokemonType.values[index]);
 
-    final resultList = _typesDs.pokemonTypeChips
+    final resultList = _typeChipsDs.pokemonTypeChips
         .where((chip) => filtredTypes.contains(chip.pokemonType))
         .toList();
         
