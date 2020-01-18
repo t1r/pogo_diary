@@ -1,6 +1,20 @@
-import 'package:pogo_diary/data/pokemon_type_value.dart';
-
-var normalList  = {
-  PokemonTypeValue(type: PokemonTypes.Normal, value: 1),
-  PokemonTypeValue(type: PokemonTypes.Fighting, value: 1)
-};
+enum PokemonType {
+  Normal,
+  Fighting, 
+  Flying,
+  Poison,
+  Ground,
+  Rock,
+  Bug,
+  Ghost,
+  Steel,
+  Fire,
+  Water,
+  Grass,
+  Electric,
+  Psychic,
+  Ice, 
+  Dragon,
+  Dark,
+  Fairy
+}
